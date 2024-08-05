@@ -19,10 +19,10 @@ umi.use(signerIdentity(signer));
         //2. Convert image to generic file.
         //3. Upload image
 
-        // const image = ???
-
-        // const [myUri] = ??? 
-        // console.log("Your image URI: ", myUri);
+        const image = await readFile("./cluster1/image/generug.png");
+        const generic = createGenericFile(image, "rug", { contentType: "image/png" });
+        const [myUri] = await umi.uploader.upload([generic]); // can upload multiple files in the array
+        console.log("Your image URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
