@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{token::Token, token_interface::Mint};
 
-use crate::state::Marketplace;
+use crate::{state::Marketplace, CustomError};
 
 #[derive(Accounts)]
 #[instruction(name: String)]
@@ -34,7 +34,7 @@ pub struct Initialize<'info> {
 
 impl<'info> Initialize<'info> {
     pub fn init(&mut self, bumps: &InitializeBumps, name: String, fee: u16) -> Result<()> {
-        require!(name.len() > 3 && name.len() < 33, MarketplaceNameError::DataTooLarge);
+        require!(name.len() > 3 && name.len() < 33, CustomError::CustomError);
         self.marketplace.admin = self.admin.key();
         self.marketplace.fee = fee;
         self.marketplace.name = name;
@@ -42,11 +42,5 @@ impl<'info> Initialize<'info> {
         self.marketplace.treasury_bump = bumps.treasury;
         Ok(())
     }
-}
-
-#[error_code]
-pub enum MarketplaceNameError {
-    #[msg("Keep name between 3 and 33 chars.")]
-    DataTooLarge
 }
 

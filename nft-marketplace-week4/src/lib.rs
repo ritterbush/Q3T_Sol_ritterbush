@@ -1,7 +1,9 @@
 use anchor_lang::prelude::*;
 mod state;
 mod contexts;
+mod error;
 use contexts::*;
+use error::*;
 
 declare_id!("58nAdUhAaZw1cdBh3xyupY6FdqrBXnA8QqejsCGNjABC");
 
