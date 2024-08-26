@@ -34,7 +34,7 @@ pub struct Initialize<'info> {
 
 impl<'info> Initialize<'info> {
     pub fn init(&mut self, bumps: &InitializeBumps, name: String, fee: u16) -> Result<()> {
-        require!(name.len() > 3 && name.len() < 33, Marketplace::InvalidName);
+        require!(name.len() > 3 && name.len() < 33, MarketplaceNameError::DataTooLarge);
         self.marketplace.admin = self.admin.key();
         self.marketplace.fee = fee;
         self.marketplace.name = name;
@@ -43,3 +43,10 @@ impl<'info> Initialize<'info> {
         Ok(())
     }
 }
+
+#[error_code]
+pub enum MarketplaceNameError {
+    #[msg("Keep name between 3 and 33 chars.")]
+    DataTooLarge
+}
+

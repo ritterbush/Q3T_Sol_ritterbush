@@ -35,3 +35,4 @@ pub struct Listing {
 impl Listing {
     pub const LEN: usize = 8 + 32 + 32 + 8 + 1 + 1;
 }
+
