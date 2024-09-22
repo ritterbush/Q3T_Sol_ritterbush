@@ -1,0 +1,148 @@
+[
+    {
+      "id": 1,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Feed the Hungry",
+      "description": "Join us in our mission to provide meals to the homeless.",
+      "content":
+        "With your help, we can provide warm meals to those in need, ensuring no one goes to bed hungry this winter.",
+      "tag": "#charity #hungerrelief #donate #helpothers",
+      "aim": "Our goal is to provide 10,000 meals by the end of the year.",
+      "title": "Feed the Hungry",
+      "whyCareList": [
+        "Hunger is a serious issue worldwide.",
+        "You can help save lives by contributing.",
+        "Small donations make a big impact.",
+        "Together, we can fight hunger."
+      ]
+    },
+    {
+      "id": 2,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1444212477490-ca407925329e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=86d24240ca6b1df611e98ed6bd7a1efc&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Help New!",
+      "description": "You know what to do. We know you know. NEW",
+      "content":
+        "Why not help us build those super warm fortresses for our little friends!? Winter is coming and they need that money to buy that wood, insulation, and tools.",
+      "tag": "#puppy #donatefunding #winter #dogs #help",
+      "aim": "Spark, Flash, and Buddy want to sleep in a comfy dog house this winter.",
+      "title": "HELP!",
+      "whyCareList": [
+        "Everyone deserves a warm place to sleep, even pets.",
+        "Your donations make a direct impact.",
+        "Winter is tough for stray animals.",
+        "A small donation can make a big difference for these pets."
+      ]
+    },
+    {
+      "id": 3,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1533112336-6265f147648c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Support Education for All",
+      "description": "Education is the key to a brighter future.",
+      "content":
+        "With your contribution, we can provide learning materials and resources to underprivileged students across the globe.",
+      "tag": "#educationforall #books #children #donate",
+      "aim": "Our goal is to provide educational resources to 5000 students.",
+      "title": "Education for All",
+      "whyCareList": [
+        "Education can change lives.",
+        "Every child deserves access to learning resources.",
+        "Your donations will help bridge the educational gap.",
+        "A better-educated world benefits us all."
+      ]
+    },
+    {
+      "id": 4,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1500985040689-e6dad48a8602?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Clean Water for Everyone",
+      "description": "Help provide clean drinking water to communities in need.",
+      "content":
+        "Your donations will go towards building wells and water filtration systems in areas where clean water is scarce.",
+      "tag": "#cleanwater #donate #helpothers #water",
+      "aim": "Bring clean drinking water to 50 villages.",
+      "title": "Water for All",
+      "whyCareList": [
+        "Clean water is essential for life.",
+        "Many communities still lack access to clean water.",
+        "Your contribution helps reduce waterborne diseases.",
+        "Clean water improves overall quality of life."
+      ]
+    },
+    {
+      "id": 5,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1575908524144-14f17b3b9451?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Save the Rainforest",
+      "description": "The rainforest is the Earth's lungs.",
+      "content":
+        "Help us protect the rainforest from deforestation and preserve its unique biodiversity.",
+      "tag": "#rainforest #nature #donate #savetheplanet",
+      "aim": "Raise funds to protect 10,000 acres of rainforest.",
+      "title": "Save the Rainforest",
+      "whyCareList": [
+        "Rainforests are crucial for global climate health.",
+        "Protecting biodiversity is essential for our future.",
+        "Deforestation leads to habitat destruction.",
+        "Every donation helps protect this vital ecosystem."
+      ]
+    },
+    {
+      "id": 6,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1560179707-f14e3eb3620a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Medical Supplies for War Zones",
+      "description":
+        "Help provide essential medical supplies to those affected by war and conflict.",
+      "content":
+        "Your donations will provide life-saving medical care to those in war-torn regions.",
+      "tag": "#medicalsupply #warzone #donate #help",
+      "aim": "Send 5000 medical kits to conflict areas.",
+      "title": "Medical Relief",
+      "whyCareList": [
+        "Every human deserves access to medical care.",
+        "Your donation can save lives in war zones.",
+        "Medical supplies are urgently needed.",
+        "Help provide relief to those suffering in conflict areas."
+      ]
+    },
+    {
+      "id": 7,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1521620551734-78cd4d312b9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Help Refugees Start Over",
+      "description": "Support refugees as they rebuild their lives.",
+      "content":
+        "Your contribution will provide housing, food, and job opportunities for refugees around the world.",
+      "tag": "#refugees #support #donate #newbeginnings",
+      "aim": "Assist 100 refugee families in finding new homes.",
+      "title": "Support Refugees",
+      "whyCareList": [
+        "Refugees need our help to start over.",
+        "Your donation will help provide basic necessities.",
+        "Everyone deserves a chance at a new beginning.",
+        "Together, we can make a difference in their lives."
+      ]
+    },
+    {
+      "id": 8,
+      "backgroundImage":
+        "https://images.unsplash.com/photo-1573495628361-d9b8791f62f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
+      "mainTitle": "Fight Climate Change",
+      "description": "Join the movement to combat climate change.",
+      "content":
+        "With your help, we can fund research, renewable energy projects, and initiatives that reduce carbon footprints.",
+      "tag": "#climatechange #donate #savetheplanet #actnow",
+      "aim": "Raise awareness and funds for climate change research.",
+      "title": "Act Now",
+      "whyCareList": [
+        "Climate change is a global crisis.",
+        "Your donation can fund innovative solutions.",
+        "Acting now can help prevent irreversible damage.",
+        "Together, we can fight for a greener future."
+      ]
+    }
+  ]
+  

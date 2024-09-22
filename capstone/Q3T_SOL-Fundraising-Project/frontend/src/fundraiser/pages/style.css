@@ -1,0 +1,6 @@
+body{
+/* I think we should add a no repeat to the background, it would help the tablet view of the dashboard page */
+  background-repeat: no-repeat;
+  height: auto;
+  overflow-x: clip;
+}
