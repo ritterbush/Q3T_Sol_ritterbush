@@ -14,4 +14,6 @@ pub enum FundraiserError {
     FundraiserNotEnded,
     #[msg("The fundraiser has ended")]
     FundraiserEnded,
+    #[msg("The maximum number of deadline extensions has been reached")]
+    MaxExtensionsReached,
 }

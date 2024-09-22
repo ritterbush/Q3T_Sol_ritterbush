@@ -7,5 +7,6 @@ pub struct Fundraiser {
     pub amount_to_raise: u64,
     pub current_amount: u64,
     pub deadline: i64,
+    pub extensions: u8,
     pub bump: u8,
 }

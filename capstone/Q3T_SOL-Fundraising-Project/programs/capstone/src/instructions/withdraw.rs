@@ -30,7 +30,7 @@ pub struct Withdraw<'info> {
 impl<'info> Withdraw<'info> {
     pub fn withdraw(&self) -> Result<()> {
 
-        // Check if the fundraising duration has been reached
+        // Check that fundraising deadline has been passed
         let current_time = Clock::get()?.unix_timestamp;
  
         require!(
@@ -38,7 +38,7 @@ impl<'info> Withdraw<'info> {
             FundraiserError::FundraiserNotEnded
         );
 
-        // Check if the target amount has been met
+        // Check that the target amount has been met
         require!(
             self.fundraiser.current_amount >= self.fundraiser.amount_to_raise,
             FundraiserError::TargetNotMet

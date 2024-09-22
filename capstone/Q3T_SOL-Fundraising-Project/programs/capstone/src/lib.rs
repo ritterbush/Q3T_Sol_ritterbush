@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 
-declare_id!("CEsmX47xiPVyeaBcH6mmgkwGNQhU77Xwim7mSTez5cK4");
+declare_id!("yBFyEKPqF5UKrg4rhKZesNpp9LQoZqVH7fe6jSkbBhr");
 
 
 mod state;
@@ -25,6 +25,12 @@ pub mod capstone {
 
     pub fn contribute(ctx: Context<Contribute>, amount: u64) -> Result<()> {
         ctx.accounts.contribute(amount)?;
+
+        Ok(())
+    }
+
+    pub fn extend(ctx: Context<Extend>) -> Result<()> {
+        ctx.accounts.extend_deadline()?;
 
         Ok(())
     }
