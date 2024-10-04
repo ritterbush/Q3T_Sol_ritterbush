@@ -14,6 +14,7 @@ export interface Campaign {
   campaignProgramId: string;
   campaignImage: string;
   contributorsPublicKeys: string,
+  privateKey: string;
 }
 
 export interface DateObject {

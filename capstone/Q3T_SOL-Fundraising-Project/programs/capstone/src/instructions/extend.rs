@@ -42,15 +42,10 @@ impl<'info> Extend<'info> {
 
         let extensions_amt = self.fundraiser.extensions + 1;
         let new_deadline = self.fundraiser.deadline + DEADLINE_EXTENSION_AMT;
+
         // Update deadline and extensions in the fundraiser account
-        self.fundraiser.set_inner(Fundraiser {
-            maker: self.fundraiser.maker,
-            amount_to_raise: self.fundraiser.amount_to_raise,
-            current_amount: self.fundraiser.current_amount,
-            deadline: new_deadline,
-            extensions: extensions_amt,
-            bump: self.fundraiser.bump,
-        });
+        self.fundraiser.deadline = new_deadline;
+        self.fundraiser.extensions = extensions_amt;
 
         Ok(())
     }

@@ -1,8 +1,13 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program, BN } from "@coral-xyz/anchor";
 import { Keypair, PublicKey, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { randomBytes } from "crypto"
+import { randomBytes } from "crypto";
 import { Capstone } from "../target/types/capstone";
+
+import makerKey from "./wallets/maker.json";
+import c1Key from "./wallets/c1.json";
+import c2Key from "./wallets/c2.json";
+
 
 describe("capstone", () => {
   // Configure the client to use the local cluster.
@@ -14,21 +19,34 @@ describe("capstone", () => {
 
   // https://www.unixtimestamp.com
   // Current unix timestamp in seconds
-  let currentTime = 1726221524;
-  // +1 hour
-  let secondsFromNow = 3600;
+  let currentTime = 1727715912;
+  let secondsFromNow = 3600; // +1 hour
   let deadline = new BN(currentTime + secondsFromNow);
 
-  let maker = new Keypair();
+  // localnet:
+  //let maker = new Keypair();
+  // devnet:
+  const maker = Keypair.fromSecretKey(new Uint8Array(makerKey));
+
+
   // contributers
-  let c1 = new Keypair();
-  let c2 = new Keypair();
 
-  // contributor amounts to donate
-  let c1Amt = new BN(30);
-  let c2Amt = new BN(20);
+  // localnet:
+  //let c1 = new Keypair();
+  //let c2 = new Keypair();
+  // devnet:
+  const c1 = Keypair.fromSecretKey(new Uint8Array(c1Key));
+  const c2 = Keypair.fromSecretKey(new Uint8Array(c2Key));
 
-  let amount = new BN(LAMPORTS_PER_SOL).mul(new BN(20));
+  // amounts to donate
+  //let c1Amt = new BN(LAMPORTS_PER_SOL).mul(new BN(1));
+  let c1Amt = new BN(3000);
+  //let c2Amt = new BN(LAMPORTS_PER_SOL).mul(new BN(1));
+  let c2Amt = new BN(7000);
+  //let c2Amt = new BN(300);
+
+  //let amount = new BN(LAMPORTS_PER_SOL).mul(new BN(2));
+  let amount = new BN(10000);
   let seed = new BN(randomBytes(16));
   //let fundraiser = PublicKey.findProgramAddressSync([Buffer.from("fundraiser"), maker.publicKey.toBuffer(), seed.toBuffer("le", 16)], program.programId)[0];
   let fundraiser = PublicKey.findProgramAddressSync([Buffer.from("fundraiser"), maker.publicKey.toBuffer()], program.programId)[0];
@@ -38,11 +56,12 @@ describe("capstone", () => {
 
   //let airdropAmt = new BN(100 * anchor.web3.LAMPORTS_PER_SOL);
 
-  it("Airdrop", async () => {
-    await Promise.all([maker, c1, c2].map(async (k) => {
-      return await anchor.getProvider().connection.requestAirdrop(k.publicKey, 100 * anchor.web3.LAMPORTS_PER_SOL).then(confirmTx)
-    }));
-  });
+  //// localnet
+  //it("Airdrop", async () => {
+  //  await Promise.all([maker, c1, c2].map(async (k) => {
+  //    return await anchor.getProvider().connection.requestAirdrop(k.publicKey, 5 * anchor.web3.LAMPORTS_PER_SOL).then(confirmTx)
+  //  }));
+  //});
 
   it("Is initialized!", async () => {
     // Add your test here.
@@ -78,6 +97,40 @@ describe("capstone", () => {
       console.log("Your transaction signature", tx);
   });
 
+  it("Deadline extended!", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .extend()
+      .accountsPartial({
+        maker: maker.publicKey,
+        fundraiser: fundraiser,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([
+        maker
+      ]).rpc().then(confirmTx);
+
+      console.log("Your transaction signature", tx);
+  });
+
+  it("Deadline extended!", async () => {
+    // Add your test here.
+    const tx = await program.methods
+      .extend()
+      .accountsPartial({
+        maker: maker.publicKey,
+        fundraiser: fundraiser,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([
+        maker
+      ]).rpc().then(confirmTx);
+
+      console.log("Your transaction signature", tx);
+  });
+
+
+/*
   it("Donor 2 Donated!", async () => {
     // Add your test here.
 
@@ -96,13 +149,14 @@ describe("capstone", () => {
       console.log("Your transaction signature", tx);
   });
 
-  it("Check Contributions: Deadline is not up!", async () => {
+  it("Withdraw", async () => {
     // Add your test here.
 
     const tx = await program.methods
-      .checkContributions()
+      .withdraw()
       .accountsPartial({
         maker: maker.publicKey,
+        feeCollector: maker.publicKey,
         fundraiser: fundraiser,
         systemProgram:SystemProgram.programId,
       })
@@ -113,44 +167,7 @@ describe("capstone", () => {
       console.log("Your transaction signature", tx);
   });
 
-  it("Refund Donor 1: Deadline is not up!", async () => {
-    // Add your test here.
-
-    const tx = await program.methods
-      .refund()
-      .accountsPartial({
-        contributor: c1.publicKey,
-        maker: maker.publicKey,
-        fundraiser: fundraiser,
-        contributorAccount: c1Acct,
-        systemProgram:SystemProgram.programId,
-      })
-      .signers([
-        c1
-      ]).rpc().then(confirmTx);
-
-      console.log("Your transaction signature", tx);
-  });
-
-  it("Refund Donor 2: Deadline is not up!", async () => {
-    // Add your test here.
-
-    const tx = await program.methods
-      .refund()
-      .accountsPartial({
-        contributor: c2.publicKey,
-        maker: maker.publicKey,
-        fundraiser: fundraiser,
-        contributorAccount: c2Acct,
-        systemProgram:SystemProgram.programId,
-      })
-      .signers([
-        c2
-      ]).rpc().then(confirmTx);
-
-      console.log("Your transaction signature", tx);
-  });
-
+*/
   const confirmTx = async (signature: string): Promise<string> => {
     const latestBlockhash = await anchor.getProvider().connection.getLatestBlockhash();
     await anchor.getProvider().connection.confirmTransaction(

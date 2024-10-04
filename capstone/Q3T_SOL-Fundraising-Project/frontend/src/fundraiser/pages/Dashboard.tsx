@@ -14,11 +14,18 @@ import { getImage } from "../../api/fileApi";
 import Image from "../atom/Image";
 import { getRemainingTime } from "../../components/getDate";
 
+interface User {
+  name: string;
+  id: string;
+  email: string;
+}
+
 const Dashboard = () => {
   const [hasCampagin, setHasCampagin] = useState<boolean>(true);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [copiedPublicKey, setCopiedPublicKey] = useState<boolean>(false);
   const [allCampaigns, setAllCampaigns] = useState<Array<Campaign>>([]);
+  const [user, setUser] = useState<User>();
   const [campaignImages, setCampaignImages] = useState<{
     [key: string]: string;
   }>({});
@@ -73,6 +80,15 @@ const Dashboard = () => {
     if (campaignDetails && Object.keys(campaignDetails).length > 0) {
       setShowDetails(true);
     }
+    const getAccessToken = () => {
+      const authUser = localStorage.getItem("user");
+      if (authUser) {
+        console.log(authUser);
+        const parsedUser: User = JSON.parse(authUser);
+        setUser(parsedUser);
+      }
+    };
+    getAccessToken();
   }, []);
 
   return (
@@ -88,7 +104,7 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between absolute bottom-[20px] text-white  px-8 w-full">
           <div className="w-full md:w-[50%]">
             <h3 className="text-[2rem] md:text-[2.5rem] font-bold">
-              Good of the Earth
+              {user?.name}
             </h3>
             <p className="text-[.8rem] md:text-[1rem]">
               Good of the Earth is a non-profit organization dedicated to

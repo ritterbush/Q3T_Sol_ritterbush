@@ -1,5 +1,5 @@
 use std::str::FromStr;
-use anchor_lang::{prelude::*, system_program::{transfer, Transfer}};
+use anchor_lang::prelude::*;
 
 use crate::{
     state::Fundraiser,
@@ -38,12 +38,6 @@ impl<'info> Withdraw<'info> {
             FundraiserError::FundraiserNotEnded
         );
 
-        // Check that the target amount has been met
-        require!(
-            self.fundraiser.current_amount >= self.fundraiser.amount_to_raise,
-            FundraiserError::TargetNotMet
-        );
-
         let wallet_collect_fees_key = Pubkey::from_str(if MAINNET {MAINNET_FEES_WALLET} else {DEVNET_FEES_WALLET}).unwrap();
 
         // Check our pubKey is the same as the fee_collector's pubKey
@@ -52,50 +46,14 @@ impl<'info> Withdraw<'info> {
             wallet_collect_fees_key,
         );
 
-        let fees_amt: u64 = (self.fundraiser.get_lamports() * 100 as u64).div_euclid(FEES_PERCENTAGE as u64);
+        let fees_amt: u64 = (self.fundraiser.get_lamports() * FEES_PERCENTAGE as u64).div_ceil(100 as u64);
 
-        // Collect fee then transfer the funds to the maker
-        let cpi_program = self.system_program.to_account_info();
+        // Tranfer fees from PDA to fee_collector
+        self.fundraiser.sub_lamports(fees_amt)?;
+        self.fee_collector.add_lamports(fees_amt)?;
 
-        // Transfer the fees from the fundraiser to the fees wallet
-        let cpi_accounts = Transfer {
-            from: self.fundraiser.to_account_info(),
-            to: self.fee_collector.to_account_info(),
-        };
-
-        // Signer seeds to sign the CPI on behalf of the fundraiser account
-        let signer_seeds: [&[&[u8]]; 1] = [&[
-            b"fundraiser".as_ref(),
-            self.maker.to_account_info().key.as_ref(),
-            &[self.fundraiser.bump],
-        ]];
-
-        // CPI context with signer since the fundraiser account is a PDA
-        let cpi_ctx = CpiContext::new_with_signer(cpi_program, cpi_accounts, &signer_seeds);
-
-        // Transfer the funds from the vault to the maker
-        transfer(cpi_ctx, fees_amt)?;
-
-
-        // Transfer the funds from the fundraiser to the maker
-        let cpi_program = self.system_program.to_account_info();
-        let cpi_accounts = Transfer {
-            from: self.fundraiser.to_account_info(),
-            to: self.maker.to_account_info(),
-        };
-
-        // Signer seeds to sign the CPI on behalf of the fundraiser account
-        let signer_seeds: [&[&[u8]]; 1] = [&[
-            b"fundraiser".as_ref(),
-            self.maker.to_account_info().key.as_ref(),
-            &[self.fundraiser.bump],
-        ]];
-
-        // CPI context with signer since the fundraiser account is a PDA
-        let cpi_ctx = CpiContext::new_with_signer(cpi_program, cpi_accounts, &signer_seeds);
-
-        // Transfer the funds from the vault to the maker
-        transfer(cpi_ctx, self.fundraiser.get_lamports())?;
+        // Simply close the fundraiser account and send all lamports to the maker
+        self.fundraiser.close(self.maker.to_account_info())?;
 
         Ok(())
     }

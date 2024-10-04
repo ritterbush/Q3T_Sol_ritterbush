@@ -25,6 +25,10 @@ if (!window.Buffer) {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <App />,
+  },
+  {
+    path: "/donate",
     element: <Home />,
   },
   {

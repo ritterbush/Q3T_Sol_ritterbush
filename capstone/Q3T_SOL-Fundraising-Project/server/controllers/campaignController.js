@@ -2,6 +2,7 @@
 const { default: mongoose } = require('mongoose');
 const Campaign = require('../models/campaign');
 const User = require('../models/user');
+const sendEmailAlert = require('../utils/sendEmail');
 
 // @route   POST /api/campaigns/create
 // @desc    Create a new campaign
@@ -21,7 +22,7 @@ const createCampaign = async (req, res) => {
             creator: req.user._id,
             campaignProgramId,
             campaignImage,
-            privatekey,
+            privateKey,
             publickKey, // User is added to request by the auth middleware
         });
 
@@ -123,6 +124,8 @@ const updateCampaign = async (req, res) => {
             currentAmount = Number(activeCampaign.currentAmount) + Number(amount);
         activeCampaign.contributorsPublicKeys = keys
         await activeCampaign.save();
+
+        // sendEmailAlert("support@gravid.com", "useremil", {amount, name: activeCampaign.name, title: activeCampaign.title})
 
         return res.status(200).json(activeCampaign);
     } catch (error) {
